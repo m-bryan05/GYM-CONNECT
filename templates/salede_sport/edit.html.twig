@@ -1,0 +1,13 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Edit SaledeSport{% endblock %}
+
+{% block body %}
+    <h1>Edit SaledeSport</h1>
+
+    {{ include('salede_sport/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('salede_sport_index') }}">back to list</a>
+
+    {{ include('salede_sport/_delete_form.html.twig') }}
+{% endblock %}
