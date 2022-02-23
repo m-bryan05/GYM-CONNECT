@@ -1,0 +1,49 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+    <h1>Liste des utilisateurs</h1>
+    <table>
+        <thead>
+
+        <th>name</th>
+        <th>lastname</th>
+        <th>tel</th>
+        <th>Email</th>
+        <th>Rôles</th>
+        <th>Actions</th>
+        </thead>
+        <tbody>
+        {# On boucle sur les utilisateurs #}
+        {% for user in users %}
+            <tr>
+
+                <td>{{ user.name }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.tel }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {# On boucle sur les rôles #}
+                    {% for role in user.roles %}
+                        {% if role == "ROLE_USER" %}
+                            Utilisateur
+                        {% elseif role == "ROLE_EDITOR" %}
+                            Editeur
+                        {% elseif role == "ROLE_ADMIN" %}
+                            Administrateur
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                <a href="{{ path('user_delete', {'id': user.id}) }}"><button class="btn-primary"> Delete</button></a>
+                <a href="{{ path('modifier_utilisateur', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+
+        {% else %}
+            <p>Aucun utilisateur inscrit</p>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
